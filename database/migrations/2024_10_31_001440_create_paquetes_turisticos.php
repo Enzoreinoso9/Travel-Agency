@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
 {
     Schema::create('paquetesturisticos', function (Blueprint $table) {
-        $table->increments('id_paquete');
+        $table->bigIncrements('id_paquete');
         $table->string('nombre', 255);
         $table->string('destino', 255);
         $table->text('descripcion')->nullable();
