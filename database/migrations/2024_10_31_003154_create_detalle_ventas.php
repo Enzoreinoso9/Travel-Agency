@@ -12,10 +12,10 @@ return new class extends Migration {
     {
         Schema::create('detalles_ventas', function (Blueprint $table) {
             $table->increments('id_detalle');
-            $table->integer('id_venta')->unsigned()->nullable();
-            $table->integer('id_paquete')->unsigned()->nullable();
-            $table->integer('id_pasaje')->unsigned()->nullable();
-            $table->integer('id_vuelo')->unsigned()->nullable();
+            $table->unsignedInteger('id_venta')->nullable();
+            $table->unsignedInteger('id_paquete')->nullable();
+            $table->unsignedInteger('id_pasaje')->nullable();
+            $table->unsignedInteger('id_vuelo')->nullable();
             $table->timestamps();
 
             $table->foreign('id_venta')->references('id_venta')->on('ventas')->onDelete('cascade');
