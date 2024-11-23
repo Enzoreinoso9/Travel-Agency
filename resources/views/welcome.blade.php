@@ -1,13 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Agencia de Viajes</title>
-    @vite("resources/js/app.js")
+    @include('layouts.head')
+    @livewireStyles
 </head>
-<body>
-    <div id="root"></div>
+<body class="font-sans antialiased">
+    <x-banner />
+
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        @include('layouts.navbar')
+
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white dark:bg-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
+
+        <!-- Page Content -->
+        <main>
+            @yield('content')
+        </main>
+    </div>
+
+    @stack('modals')
+
+    @livewireScripts
+    @include('layouts.footer')
 </body>
 </html>

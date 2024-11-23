@@ -13,15 +13,24 @@ return new class extends Migration
 {
     Schema::create('ventas', function (Blueprint $table) {
         $table->increments('id_venta');
-        $table->integer('id_cliente')->unsigned();
-        $table->integer('id_usuario')->unsigned();
+        $table->unsignedInteger('id_cliente');
+        $table->unsignedInteger('id_usuario');
         $table->datetime('fecha_venta');
         $table->decimal('monto_total', 10, 2);
         $table->enum('estado_pago', ['completo', 'parcial', 'pendiente'])->default('pendiente');
         $table->timestamps();
 
-        $table->foreign('id_cliente')->references('id_cliente')->on('clientes')->onDelete('cascade');
-        $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+        $table->foreign('id_cliente')
+              ->references('id_cliente')
+              ->on('clientes')
+              ->onDelete('cascade')
+              ->onUpdate('cascade');
+        
+        $table->foreign('id_usuario')
+              ->references('id_usuario')
+              ->on('usuarios')
+              ->onDelete('cascade')
+              ->onUpdate('cascade');
     });
 }
 
