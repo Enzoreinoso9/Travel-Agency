@@ -2,6 +2,7 @@ import React from 'react'
 
 const Login = () => {
   return (
+<<<<<<< HEAD
     <div className='flex items-center justify-center min-h-screen '>
       <div className=' bg-white bg-opacity-50 p-8 rounded-lg shadow-md backdrop-filter backdrop-blur-lg w-full max-w-sm'>
       
@@ -35,6 +36,10 @@ const Login = () => {
 
 <button>Ingresar</button>
       </div>
+=======
+    <div>
+      Login
+>>>>>>> e0b01be1 (Merge lucas-dev: Reorganización de estructura de archivos frontend -> resources/js)
     </div>
   )
 }

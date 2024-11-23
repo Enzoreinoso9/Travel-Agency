@@ -1,36 +1,27 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { BrowserRouter as Router, useLocation } from 'react-router-dom'
 import Routers from './routes/Routers'
-import Dashboard from './components/Dashboard/Dashboard'
+import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar'
 import './App.css'
 
 
 const AppContent = () => {
 
-
-//Ocultar Navbar
  const location = useLocation();
 
 const hideComponents = ['/login', '/register', '/error'];
 
 const shoulHideComponents = hideComponents.includes(location.pathname);
 
-const contentClass = shoulHideComponents ? "content" : "content ml-80 mr-40 mt-20";
-
-
   return (
-<div>
-
-    <div className=" app-container">
+    <div className="app-container">
+    {!shoulHideComponents && <Navbar/>}
     {!shoulHideComponents && <Sidebar/>}
-    {!shoulHideComponents && <Dashboard/>}
-      <div className={contentClass}>
-        
+      <div className="content">
       <Routers/>
       </div>
     </div>
-</div>
   )
 }
 
