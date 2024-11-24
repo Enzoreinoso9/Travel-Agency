@@ -1,25 +1,40 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Auth\Login;
-use App\Http\Livewire\Auth\Register;
 
 Route::get('/', function () {
-    return redirect()->route('login');
-})->name('home');
-
-Route::middleware('guest')->group(function () {
-    Route::get('/login', Login::class)->name('login');
-    Route::get('/register', Register::class)->name('register');
+    return view('inicio');
 });
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::get('/clientes', function () {
+    return view('clientes');
 });
-
-Route::post('/logout', function () {
-    auth()->logout();
-    return redirect('/');
-})->name('logout');
+Route::get('/estadisticas', function () {
+    return view('estadisticas');
+});
+Route::get('/itinerarios', function () {
+    return view('itinerarios');
+});
+Route::get('/login', function () {
+    return view('login');
+});
+Route::get('/notificaciones', function () {
+    return view('notificaciones');
+});
+Route::get('/paquetes', function () {
+    return view('paquetes');
+});
+Route::get('/proveedores', function () {
+    return view('proveedores');
+});
+Route::get('/register', function () {
+    return view('register');
+});
+Route::get('/soporte', function () {
+    return view('soporte');
+});
+Route::get('/ventas', function () {
+    return view('ventas');
+});
+Route::get('/viajes', function () {
+    return view('viajes');
+});

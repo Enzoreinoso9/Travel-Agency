@@ -1,0 +1,32 @@
+.table{
+    table-layout: auto;
+    width: auto;
+}
+
+.table thead{
+    background-color: rgb(46, 46, 46);
+    color: white;
+    text-align: center;
+    border: 1px solid black
+}
+
+.table tbody{
+    background-color: rgb(236, 234, 234);
+    color: black;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+.table th {
+    
+    border: 1px solid black;
+}
+
+.table td{
+    border: 1px solid black;
+    overflow: hidden; /* Oculta el contenido que sobresale */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos si el texto es demasiado largo */
+    white-space: normal; /* Evita que el texto se divida en varias líneas */
+    padding: 8px;
+}
+

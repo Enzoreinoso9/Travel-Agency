@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Auth;
 
 use Livewire\Component;
 
-class Usuario extends Component
+class Register extends Component
 {
     public function render()
     {
-        return view('livewire.usuario');
+        return view('livewire.auth.register');
     }
 }
