@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Asegúrate de que html y body ocupen toda la altura */
+html, body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff; /* Color de fondo general */
+    min-height: 100vh;
+}
+
+/* Asegúrate de que .app-container ocupe toda la altura de la página */
+.app-container {
+    display: flex;
+    min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+    background-color: #fff;
+}
+
+/* El sidebar se mantiene fijo en la pantalla */
+aside {
+    position: fixed; /* Hace que el sidebar esté fijo en la pantalla */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 16rem; /* Ancho del Sidebar */
+    z-index: 1000; /* Asegura que el sidebar esté por encima de otros elementos */
+    overflow-y: auto; /* Si el contenido del sidebar es más grande que la altura de la pantalla, permitirá desplazarse */
+}
+
+/* El contenido principal */
+.contenido {
+    margin-left: 16rem; /* Ancho del Sidebar */
+    flex: 1; /* Esto asegura que el contenido ocupe el espacio restante */
+    background-color: #fff; /* Asegura que el fondo sea coherente */
+    min-height: 100vh; /* Asegura que el contenido también ocupe toda la altura de la pantalla */
+}
+
+/* Dentro de .contenido, el main se ajusta para ocupar el resto del espacio */
+.contenido main {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff; /* Asegura que el fondo dentro de main sea coherente */
+}
