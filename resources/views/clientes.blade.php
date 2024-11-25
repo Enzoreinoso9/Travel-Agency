@@ -15,7 +15,7 @@
 
 
 
-        <button class="btn btn-info mt-5 mb-4 text-white">Agregar </button>
+        <button id="agregar" class="btn btn-info mt-5 mb-4 text-white">Agregar </button>
 
         <div class="overflow-x-auto mr-5 max-w-full">
             <table class="table w-full min-w-[800px]">
@@ -54,8 +54,67 @@
 
 
     </div>
+
+
+
+
+    <!--FORMULARIO PARA AGREGAR DATOS-->
+    <div id="formularioContainer" class="formulario-container">
+        <div class="formulario">
+            <span id="cerrarAgregar" class="cerrar-formulario">&times;</span>
+            <h2>Registrar Cliente</h2>
+            <form class="cliente-form" action="" method="post">
+
+                <div class="form-grupo">
+                    <label for="">Nombres:</label>
+                    <input type="text" name="nombre" id="nombre">
+                </div>
+
+                <div class="form-grupo">
+                    <label for="">Apellido:</label>
+                    <input type="text" name="apellido" id="apellido">
+                </div>
+
+                <div class="form-grupo">
+                    <label for="">DNI:</label>
+                    <input type="text" name="dni" id="dni">
+                </div>
+
+                <div class="form-grupo">
+                    <label for="">Email:</label>
+                    <input type="email" name="correo" id="correo">
+                </div>
+
+
+                <div class="form-grupo">
+                    <label for="">Telefono:</label>
+                    <input type="text" name="telefono" id="telefono">
+                </div>
+
+
+                <div class="form-grupo">
+                    <label for="">Direccion:</label>
+                    <input type="text" name="direccion" id="direccion">
+                </div>
+
+                <input type="submit" name="Guardar" class="guardar" value="Guardar">
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+
+
 @endsection
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/Clientes.css') }}">
+@endpush
+
+@push('scripts')
+    @vite('resources/js/clientes.js')
 @endpush
