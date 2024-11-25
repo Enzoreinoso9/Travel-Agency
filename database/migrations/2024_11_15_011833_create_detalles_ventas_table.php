@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('detalles_ventas', function (Blueprint $table) {
             $table->increments('id_detalle');
             $table->unsignedInteger('id_venta')->nullable();
-            $table->unsignedInteger('id_paquete')->nullable();
+            $table->unsignedBigInteger('id_paquete')->nullable();
             $table->unsignedInteger('id_pasaje')->nullable();
             $table->unsignedInteger('id_vuelo')->nullable();
             $table->timestamps();

@@ -11,8 +11,8 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('componentes', function (Blueprint $table) {
-            $table->increments('id_componente');
-            $table->integer('id_paquete')->unsigned()->nullable();
+            $table->bigIncrements('id_componente');
+            $table->unsignedBigInteger('id_paquete');
             $table->enum('tipo_componente', ['hospedaje', 'transporte', 'tour', 'comida'])->nullable();
             $table->text('descripcion')->nullable();
             $table->decimal('precio', 10, 2)->nullable();
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('componenetes');
+        Schema::dropIfExists('componentes');
     }
 };

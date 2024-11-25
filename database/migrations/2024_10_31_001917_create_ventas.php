@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('ventas', function (Blueprint $table) {
         $table->increments('id_venta');
         $table->unsignedInteger('id_cliente');
-        $table->unsignedInteger('id_usuario');
+        $table->unsignedBigInteger('id_usuario');
         $table->datetime('fecha_venta');
         $table->decimal('monto_total', 10, 2);
         $table->enum('estado_pago', ['completo', 'parcial', 'pendiente'])->default('pendiente');

@@ -8,4 +8,7 @@
             </div>
         </div>
     </div>
+    <div class="dashboard-stats">
+        @livewire('dashboard.estadisticas')
+    </div>
 </x-app-layout> 

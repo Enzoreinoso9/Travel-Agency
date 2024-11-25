@@ -10,6 +10,7 @@ return new class extends Migration {
      */
     public function up()
     {
+        Schema::dropIfExists('vuelos');
         Schema::create('vuelos', function (Blueprint $table) {
             $table->increments('id_vuelo');
             $table->string('aerolinea', 255);

@@ -1,19 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'Estadisticas')
+@section('title', 'Estadísticas')
 
 @section('content')
-
     <div>
-
         <!--Breadcrumbs-->
-        <div class="breadcrumbs text-sm p-4  w-full">
-            <ul class="flex space-x-2 tex text-green-950">
+        <div class="breadcrumbs text-sm p-4 w-full">
+            <ul class="flex space-x-2 text-green-950">
                 <li>
-                    <a src="/inicio" class="font-bold hover:underline">Inicio</a>
+                    <a href="/inicio" class="font-bold hover:underline">Inicio</a>
                 </li>
-                <li class="font-bold">Estadisticas</li>
+                <li class="font-bold">Estadísticas</li>
             </ul>
+        </div>
+
+        <!-- Componente Livewire de Estadísticas -->
+        <div class="px-4">
+            @livewire('dashboard.estadisticas')
         </div>
     </div>
 @endsection
