@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public const HOME = '/dashboard'; // Ruta después del login
+    public const HOME = '/'; // Cambia esto según tu ruta principal después del login
 
     public function boot()
     {

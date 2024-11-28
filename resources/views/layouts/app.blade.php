@@ -13,17 +13,15 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @if(request()->routeIs('dashboard*'))
-                @include('layouts.navigation')
-            @endif
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+        <!-- Styles -->
+        @livewireStyles
+    </head>
+    <body>
+        <div class="min-h-screen bg-gray-100">
+            {{ $slot }}
         </div>
+
+        @livewireScripts
     </body>
 </html>

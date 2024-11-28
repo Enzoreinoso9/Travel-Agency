@@ -4,20 +4,20 @@ namespace App\Http\Livewire\Auth;
 
 use App\Models\Usuario;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class Register extends Component
 {
-    public $nombre_usuario;
+    public $name;
     public $email;
     public $password;
     public $password_confirmation;
-    public $rol = 'usuario';
 
     protected $rules = [
-        'nombre_usuario' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:usuarios'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'name' => 'required|min:3',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:confirmed',
     ];
 
     public function register()
@@ -25,19 +25,18 @@ class Register extends Component
         $this->validate();
 
         $user = Usuario::create([
-            'nombre_usuario' => $this->nombre_usuario,
+            'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'rol' => 'usuario',
         ]);
 
-        auth()->login($user);
+        Auth::login($user);
 
-        return redirect()->intended('/dashboard');
+        return redirect()->route('dashboard');
     }
 
     public function render()
     {
-        return view('livewire.auth.register');
+        return view('livewire.auth.register')->layout('layouts.guest');
     }
 }

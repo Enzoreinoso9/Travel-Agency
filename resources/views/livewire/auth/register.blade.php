@@ -1,109 +1,83 @@
-<div class="min-h-screen flex relative">
-    <!-- Fondo con imagen -->
-    <div class="fixed inset-0 z-0">
-        <img src="{{ asset('images/login-bg.jpg') }}" 
-             class="h-full w-full object-cover"
-             alt="Background">
-    </div>
-    
-    <!-- Espaciador izquierdo -->
-    <div class="hidden lg:block lg:flex-1"></div>
-    
-    <!-- Contenedor del formulario -->
-    <div class="absolute right-0 top-0 w-full lg:w-1/3 h-full
-                bg-emerald-600/70 dark:bg-emerald-800/70 backdrop-blur-sm">
-        <div class="h-full flex items-center justify-center">
-            <div class="w-full max-w-md p-8">
-                <!-- Logo -->
-                <div class="flex justify-center mb-8">
-                    <img src="{{ asset('images/logo.png') }}" 
-                         alt="Logo" 
-                         class="h-12 w-auto">
-                </div>
+@extends('layouts.plain')
 
-                <!-- Título y subtítulo -->
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold text-white">
-                        {{ __('Create Account') }}
-                    </h2>
-                    <p class="mt-2 text-sm text-white/80">
-                        {{ __('Sign up for your account') }}
-                    </p>
-                </div>
+@section('title', 'Registro')
 
-                <form wire:submit.prevent="register" class="mt-8 space-y-6">
-                    <div class="space-y-5">
-                        <!-- Nombre -->
-                        <div>
-                            <x-input-label for="nombre_usuario" :value="__('Nombre de Usuario')" class="text-white" />
-                            <x-text-input wire:model.defer="nombre_usuario" 
-                                id="nombre_usuario"
-                                class="mt-1 block w-full rounded-md border-white/20 bg-white/10 
-                                       text-white placeholder-white/70 focus:border-white 
-                                       focus:ring-white/50"
-                                type="text"
-                                name="nombre_usuario"
-                                required
-                                autofocus />
-                            <x-input-error :messages="$errors->get('nombre_usuario')" class="mt-2" />
-                        </div>
+@section('content')
+<div class='relative min-h-screen bg-gray-800 bg-opacity-60 flex items-center login-component'>
+    <div class='absolute right-0 h-full bg-gray-900 bg-opacity-50 p-8 rounded-l-lg shadow-md backdrop-filter backdrop-blur-lg w-full max-w-sm flex flex-col justify-center items-center'>
+        <h1 class='font-bold text-white text-center mb-8'>Registro de Usuario</h1>
 
-                        <!-- Email -->
-                        <div>
-                            <x-input-label for="email" :value="__('Email')" class="text-white" />
-                            <x-text-input wire:model.defer="email" 
-                                id="email"
-                                class="mt-1 block w-full rounded-md border-white/20 bg-white/10 
-                                       text-white placeholder-white/70 focus:border-white 
-                                       focus:ring-white/50"
-                                type="email"
-                                name="email"
-                                required />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                        </div>
+        <form wire:submit.prevent="register" class="w-full">
+            <!-- Nombre de Usuario -->
+            <label class="input input-bordered flex items-center gap-2 w-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70 text-green-700">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+                </svg>
+                <input wire:model="nombre_usuario" 
+                       type="text" 
+                       class="grow bg-transparent placeholder-gray-500" 
+                       placeholder="Nombre de Usuario" />
+            </label>
+            @error('nombre_usuario') 
+                <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> 
+            @enderror
 
-                        <!-- Password -->
-                        <div>
-                            <x-input-label for="password" :value="__('Password')" class="text-white" />
-                            <x-text-input wire:model.defer="password" 
-                                id="password"
-                                class="mt-1 block w-full rounded-md border-white/20 bg-white/10 
-                                       text-white placeholder-white/70 focus:border-white 
-                                       focus:ring-white/50"
-                                type="password"
-                                name="password"
-                                required />
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        </div>
+            <!-- Email -->
+            <label class="input input-bordered flex items-center gap-2 w-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70 text-green-700">
+                    <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"/>
+                    <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"/>
+                </svg>
+                <input wire:model="email" 
+                       type="email" 
+                       class="grow bg-transparent placeholder-gray-500" 
+                       placeholder="Email" />
+            </label>
+            @error('email') 
+                <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> 
+            @enderror
 
-                        <!-- Confirm Password -->
-                        <div>
-                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="text-white" />
-                            <x-text-input wire:model.defer="password_confirmation" 
-                                id="password_confirmation"
-                                class="mt-1 block w-full rounded-md border-white/20 bg-white/10 
-                                       text-white placeholder-white/70 focus:border-white 
-                                       focus:ring-white/50"
-                                type="password"
-                                name="password_confirmation"
-                                required />
-                        </div>
-                    </div>
+            <!-- Contraseña -->
+            <label class="input input-bordered flex items-center gap-2 w-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70 text-green-700">
+                    <path fillRule="evenodd" d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z" clipRule="evenodd" />
+                </svg>
+                <input wire:model="password" 
+                       type="password" 
+                       class="grow bg-transparent placeholder-gray-500" 
+                       placeholder="Contraseña" />
+            </label>
+            @error('password') 
+                <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> 
+            @enderror
 
-                    <div class="flex flex-col space-y-4">
-                        <x-primary-button>
-                            {{ __('Register') }}
-                        </x-primary-button>
+            <!-- Confirmar Contraseña -->
+            <label class="input input-bordered flex items-center gap-2 w-full mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70 text-green-700">
+                    <path fillRule="evenodd" d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z" clipRule="evenodd" />
+                </svg>
+                <input wire:model="password_confirmation" 
+                       type="password" 
+                       class="grow bg-transparent placeholder-gray-500" 
+                       placeholder="Confirmar Contraseña" />
+            </label>
 
-                        <p class="text-center text-sm">
-                            <a href="{{ route('login') }}" 
-                               class="text-white hover:text-white/80">
-                                {{ __('Already have an account? Login') }}
-                            </a>
-                        </p>
-                    </div>
-                </form>
+            <button type="submit" 
+                    class="bg-green-900 hover:bg-green-500 text-white font-semibold py-2 px-4 rounded w-full mb-4">
+                Registrarse
+            </button>
+
+            <div class="text-center">
+                <a href="{{ route('login') }}" 
+                   class="text-sm text-gray-300 hover:text-white hover:underline">
+                    ¿Ya tienes una cuenta? Inicia sesión
+                </a>
             </div>
-        </div>
+        </form>
     </div>
 </div>
+@endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/Login.css') }}">
+@endpush
