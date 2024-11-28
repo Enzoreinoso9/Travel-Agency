@@ -1,73 +1,71 @@
-<div class="p-6 bg-white rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold mb-6">Estadísticas</h2>
+<div class="py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+            Dashboard
+        </h2>
 
-    <!-- Estadísticas de Ventas -->
-    <div class="mb-8">
-        <h3 class="text-xl font-semibold mb-4">Ventas Totales</h3>
-        <div class="flex space-x-4 mb-4">
-            <button wire:click="$set('periodoVentas', 'semana')" 
-                    class="px-4 py-2 rounded {{ $periodoVentas === 'semana' ? 'bg-green-600 text-white' : 'bg-gray-200' }}">
-                Semana
-            </button>
-            <button wire:click="$set('periodoVentas', 'mes')"
-                    class="px-4 py-2 rounded {{ $periodoVentas === 'mes' ? 'bg-green-600 text-white' : 'bg-gray-200' }}">
-                Mes
-            </button>
-            <button wire:click="$set('periodoVentas', 'año')"
-                    class="px-4 py-2 rounded {{ $periodoVentas === 'año' ? 'bg-green-600 text-white' : 'bg-gray-200' }}">
-                Año
-            </button>
-        </div>
-        <div class="grid grid-cols-4 gap-4">
-            <div class="bg-gray-100 p-6 rounded-lg">
-                <p class="text-4xl font-bold text-green-600">{{ $estadisticas['ventas']['total'] }}</p>
-                <p class="text-gray-600">Ventas totales</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <!-- Tarjeta de Ventas -->
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-lg p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-emerald-500 bg-opacity-75">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Ventas Totales</p>
+                        <p class="text-lg font-semibold text-gray-900 dark:text-white">$15,350</p>
+                    </div>
+                </div>
             </div>
-            <div class="bg-gray-100 p-6 rounded-lg">
-                <p class="text-4xl font-bold text-green-600">S/. {{ number_format($estadisticas['ventas']['monto_total'], 2) }}</p>
-                <p class="text-gray-600">Monto total</p>
+
+            <!-- Tarjeta de Clientes -->
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-lg p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-blue-500 bg-opacity-75">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Clientes Totales</p>
+                        <p class="text-lg font-semibold text-gray-900 dark:text-white">248</p>
+                    </div>
+                </div>
             </div>
-            <div class="bg-gray-100 p-6 rounded-lg">
-                <p class="text-4xl font-bold text-green-600">{{ $estadisticas['ventas']['disponibles'] }}</p>
-                <p class="text-gray-600">Paquetes disponibles</p>
+
+            <!-- Tarjeta de Vuelos -->
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-lg p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-purple-500 bg-opacity-75">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Vuelos Activos</p>
+                        <p class="text-lg font-semibold text-gray-900 dark:text-white">35</p>
+                    </div>
+                </div>
             </div>
-            <div class="bg-gray-100 p-6 rounded-lg">
-                <div class="space-y-2">
-                    <p class="text-sm text-gray-600">Desglose de ventas:</p>
-                    <p class="text-sm">Paquetes: {{ $estadisticas['ventas']['desglose']['paquetes'] }}</p>
-                    <p class="text-sm">Vuelos: {{ $estadisticas['ventas']['desglose']['vuelos'] }}</p>
-                    <p class="text-sm">Pasajes: {{ $estadisticas['ventas']['desglose']['pasajes'] }}</p>
+
+            <!-- Tarjeta de Paquetes -->
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-lg p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-yellow-500 bg-opacity-75">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Paquetes Vendidos</p>
+                        <p class="text-lg font-semibold text-gray-900 dark:text-white">124</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Estadísticas de Servicios -->
-    <div>
-        <h3 class="text-xl font-semibold mb-4">Servicios Activos</h3>
-        <div class="flex space-x-4 mb-4">
-            <button wire:click="$set('periodoVuelos', 'mes')"
-                    class="px-4 py-2 rounded {{ $periodoVuelos === 'mes' ? 'bg-green-600 text-white' : 'bg-gray-200' }}">
-                Mes
-            </button>
-            <button wire:click="$set('periodoVuelos', 'año')"
-                    class="px-4 py-2 rounded {{ $periodoVuelos === 'año' ? 'bg-green-600 text-white' : 'bg-gray-200' }}">
-                Año
-            </button>
-        </div>
-        <div class="grid grid-cols-3 gap-4">
-            <div class="bg-gray-100 p-6 rounded-lg">
-                <p class="text-4xl font-bold text-green-600">{{ $estadisticas['vuelos']['vuelos'] }}</p>
-                <p class="text-gray-600">Vuelos programados</p>
-            </div>
-            <div class="bg-gray-100 p-6 rounded-lg">
-                <p class="text-4xl font-bold text-green-600">{{ $estadisticas['vuelos']['pasajes'] }}</p>
-                <p class="text-gray-600">Pasajes de ómnibus</p>
-            </div>
-            <div class="bg-gray-100 p-6 rounded-lg">
-                <p class="text-4xl font-bold text-green-600">{{ $estadisticas['vuelos']['paquetes'] }}</p>
-                <p class="text-gray-600">Paquetes turísticos</p>
-            </div>
-        </div>
+        <!-- Gráficos o contenido adicional aquí -->
     </div>
 </div>

@@ -1,64 +1,32 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Livewire\Dashboard\Estadisticas;
-use App\Http\Livewire\Clientes;
-use App\Http\Livewire\Ventas;
-use App\Http\Livewire\Vuelos;
-use App\Http\Livewire\PaquetesTuristicos;
-use App\Http\Livewire\PasajesOmnibus;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
-
-// Ruta principal
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+use App\Http\Livewire\Dashboard\Estadisticas;
+use Illuminate\Support\Facades\Auth;
 
 // Rutas de autenticación
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [Login::class, 'render'])->name('login');
-    Route::get('/register', [Register::class, 'render'])->name('register');
+    Route::get('/', function () {
+        return redirect('/login');
+    });
+    Route::get('/login', Login::class)->name('login');
+    Route::get('/register', Register::class)->name('register');
 });
 
 // Rutas protegidas
 Route::middleware('auth')->group(function () {
-    // Dashboard
-    Route::get('/dashboard', function() {
-        return view('dashboard.estadisticas');
-    })->name('dashboard');
+    Route::get('/dashboard', Estadisticas::class)->name('dashboard');
+    Route::get('/clientes', function() { return view('clientes'); })->name('clientes');
+    Route::get('/ventas', function() { return view('ventas'); })->name('ventas');
+    Route::get('/vuelos', function() { return view('vuelos'); })->name('vuelos');
+    Route::get('/paquetes', function() { return view('paquetes'); })->name('paquetes');
+    Route::get('/pasajes', function() { return view('pasajes'); })->name('pasajes');
     
-    // Clientes
-    Route::get('/clientes', function() {
-        return view('clientes');
-    })->name('clientes');
-    
-    // Ventas
-    Route::get('/ventas', function() {
-        return view('ventas.index');
-    })->name('ventas');
-    
-    // Vuelos
-    Route::get('/vuelos', function() {
-        return view('vuelos.index');
-    })->name('vuelos');
-    
-    // Paquetes Turísticos
-    Route::get('/paquetes', function() {
-        return view('paquetes.index');
-    })->name('paquetes');
-    
-    // Pasajes de Ómnibus
-    Route::get('/pasajes', function() {
-        return view('pasajes.index');
-    })->name('pasajes');
-
-    // Logout
+    // Ruta de logout
     Route::post('/logout', function () {
         Auth::logout();
-        session()->invalidate();
-        session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     })->name('logout');
 });

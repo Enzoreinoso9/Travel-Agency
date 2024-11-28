@@ -7,28 +7,27 @@ use Illuminate\Support\Facades\Auth;
 
 class Login extends Component
 {
-    public $email;
-    public $password;
+    public $email = '';
+    public $password = '';
     public $remember = false;
-
-    protected $rules = [
-        'email' => 'required|email',
-        'password' => 'required',
-    ];
 
     public function login()
     {
-        $this->validate();
+        $credentials = $this->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            return redirect()->intended('dashboard');
+        if (Auth::attempt($credentials, $this->remember)) {
+            session()->regenerate();
+            return redirect()->intended('/dashboard');
         }
 
-        $this->addError('email', trans('auth.failed'));
+        $this->addError('email', 'Las credenciales proporcionadas son incorrectas.');
     }
 
     public function render()
     {
-        return view('livewire.auth.login')->layout('layouts.guest');
+        return view('livewire.auth.login');
     }
 } 
