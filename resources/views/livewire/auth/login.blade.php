@@ -40,9 +40,10 @@
                             <x-input-label for="email" :value="__('Email')" class="text-white" />
                             <x-text-input wire:model.defer="email" 
                                 id="email" 
-                                class="mt-1 block w-full rounded-md border-white/20 bg-white/10 
+                                class="mt-1 block w-full rounded-md border border-white/20 bg-white/10 
                                        text-white placeholder-white/70 focus:border-white 
-                                       focus:ring-white/50" 
+                                       focus:ring focus:ring-white/50 transition duration-200 ease-in-out 
+                                       shadow-md hover:shadow-lg p-2" 
                                 type="email" 
                                 name="email" 
                                 required 
@@ -55,9 +56,10 @@
                             <x-input-label for="password" :value="__('Password')" class="text-white" />
                             <x-text-input wire:model.defer="password" 
                                 id="password" 
-                                class="mt-1 block w-full rounded-md border-white/20 bg-white/10 
+                                class="mt-1 block w-full rounded-md border border-white/20 bg-white/10 
                                        text-white placeholder-white/70 focus:border-white 
-                                       focus:ring-white/50"
+                                       focus:ring focus:ring-white/50 transition duration-200 ease-in-out 
+                                       shadow-md hover:shadow-lg p-2"
                                 type="password"
                                 name="password"
                                 required 
@@ -66,14 +68,12 @@
                         </div>
                     </div>
 
-                   
                     <div class="flex flex-col space-y-4 mt-4">
                         <div class="flex items-center justify-end">
-                            <x-primary-button>
+                            <x-primary-button class="transition duration-200 ease-in-out transform hover:scale-105">
                                 {{ __('Log in') }}
                             </x-primary-button>
                         </div>
-                        
                     </div>
                 </form>
             </div>

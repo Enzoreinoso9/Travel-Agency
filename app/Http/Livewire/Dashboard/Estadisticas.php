@@ -3,6 +3,10 @@
 namespace App\Http\Livewire\Dashboard;
 
 use Livewire\Component;
+use App\Models\Venta;
+use App\Models\Cliente;
+use App\Models\Vuelo;
+use App\Models\PaqueteTuristico;
 
 class Estadisticas extends Component
 {
@@ -13,10 +17,15 @@ class Estadisticas extends Component
 
     public function mount()
     {
-        $this->totalVentas = 15350;
-        $this->totalClientes = 248;
-        $this->vuelosActivos = 35;
-        $this->paquetesVendidos = 124;
+        $this->calcularEstadisticas();
+    }
+
+    public function calcularEstadisticas()
+    {
+        $this->totalVentas = Venta::sum('monto_total');
+        $this->totalClientes = Cliente::count();
+        $this->vuelosActivos = Vuelo::where('disponibilidad', '>', 0)->count();
+        $this->paquetesVendidos = PaqueteTuristico::where('estado', 'completado')->count();
     }
 
     public function render()

@@ -1,4 +1,8 @@
-<div>
+<div class="dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+            Paquetes Turisticos
+        </h2>
     @if (session()->has('message'))
         <div class="alert alert-success bg-green-500 text-white p-4 rounded-lg mb-4" role="alert" id="success-alert">
             {{ session('message') }}
@@ -57,4 +61,5 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
