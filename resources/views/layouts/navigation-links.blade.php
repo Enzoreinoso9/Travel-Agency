@@ -52,3 +52,4 @@
         <span class="ml-3" x-show="sidebarOpen">Pasajes</span>
     </x-nav-link>
 </li> 
+

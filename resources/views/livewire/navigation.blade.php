@@ -95,18 +95,30 @@
             <!-- User Profile -->
             <div class="border-t border-emerald-700">
                 <div class="flex items-center p-4 bg-emerald-900">
-                    <img class="h-8 w-8 rounded-full" 
-                         src="{{ auth()->user()->profile_photo_url ?? asset('images/default-avatar.png') }}" 
-                         alt="{{ auth()->user()->name }}">
-                    <div class="ml-3" x-show="open">
-                        <p class="text-sm font-medium text-white">{{ auth()->user()->name }}</p>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="text-sm text-gray-300 hover:text-white">
-                                {{ __('Cerrar sesión') }}
-                            </button>
-                        </form>
-                    </div>
+                    @auth
+                        <div class="dropdown dropdown-end">
+                            <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                                <div class="w-10 rounded-full">
+                                    <img src="{{ Auth::user()->profile_photo_url }}" alt="profile" />
+                                </div>
+                            </label>
+                            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white dark:bg-gray-700 rounded-box w-52">
+                                <li><a href="{{ route('profile.edit') }}" class="text-gray-700 dark:text-white">Editar</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a href="{{ route('logout') }}" 
+                                           onclick="event.preventDefault(); this.closest('form').submit();"
+                                           class="text-gray-700 dark:text-white">
+                                            Salir
+                                        </a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-ghost text-white">Iniciar Sesión</a>
+                    @endauth
                 </div>
             </div>
         </div>

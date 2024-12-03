@@ -8,47 +8,47 @@
         </div>
     @endif
 
-    <button wire:click="abrirCreateModal" class="btn btn-primary mb-4">Agregar Paquete Turístico</button>
+    <button wire:click="abrirCreateModal" class="btn btn-primary mb-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Agregar Paquete Turístico</button>
 
     <!-- Modal para crear paquete -->
     @if ($isCreateModalOpen)
-        @include('livewire.paquete-turistico.create-paquete-modal')
+        @include('livewire.paquetes.create-paquete-modal')
     @endif
 
     <!-- Modal para editar paquete -->
     @if ($isEditModalOpen)
-        @include('livewire.paquete-turistico.edit-paquete-modal')
+        @include('livewire.paquetes.edit-paquete-modal')
     @endif
 
     <div class="overflow-x-auto">
-        <table class="table w-full">
+        <table class="table w-full bg-white shadow-md rounded-lg">
             <thead>
-                <tr>
-                    <th class="bg-base-300">Origen</th>
-                    <th class="bg-base-300">Destino</th>
-                    <th class="bg-base-300">Fecha Vuelo</th>
-                    <th class="bg-base-300">Hora Salida</th>
-                    <th class="bg-base-300">Estado</th>
-                    <th class="bg-base-300">Capacidad</th>
-                    <th class="bg-base-300">Asientos Disponibles</th>
-                    <th class="bg-base-300">Acciones</th>
+                <tr class="bg-gray-800 text-white">
+                    <th class="p-2">Origen</th>
+                    <th class="p-2">Destino</th>
+                    <th class="p-2">Fecha Vuelo</th>
+                    <th class="p-2">Hora Salida</th>
+                    <th class="p-2">Estado</th>
+                    <th class="p-2">Capacidad</th>
+                    <th class="p-2">Asientos Disponibles</th>
+                    <th class="p-2">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($paquetes as $paquete)
-                    <tr>
-                        <td>{{ $paquete->origen }}</td>
-                        <td>{{ $paquete->destino }}</td>
-                        <td>{{ $paquete->fecha_vuelo }}</td>
-                        <td>{{ $paquete->hora_salida }}</td>
-                        <td>{{ $paquete->estado }}</td>
-                        <td>{{ $paquete->capacidad }}</td>
-                        <td>{{ $paquete->asientos_disponibles }}</td>
-                        <td class="flex space-x-2">
-                            <button wire:click="abrirEditModal({{ $paquete->id_paquete }})" class="btn btn-secondary w-10 h-10 flex items-center justify-center">
+                    <tr class="border-b hover:bg-gray-100">
+                        <td class="p-2">{{ $paquete->origen }}</td>
+                        <td class="p-2">{{ $paquete->destino }}</td>
+                        <td class="p-2">{{ $paquete->fecha_vuelo }}</td>
+                        <td class="p-2">{{ $paquete->hora_salida }}</td>
+                        <td class="p-2">{{ $paquete->estado }}</td>
+                        <td class="p-2">{{ $paquete->capacidad }}</td>
+                        <td class="p-2">{{ $paquete->asientos_disponibles }}</td>
+                        <td class="p-2 flex space-x-2">
+                            <button wire:click="abrirEditModal({{ $paquete->id_paquete }})" class="w-8 h-8 flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white rounded-full">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button wire:click="delete({{ $paquete->id_paquete }})" class="btn btn-error w-10 h-10 flex items-center justify-center">
+                            <button wire:click="delete({{ $paquete->id_paquete }})" class="w-8 h-8 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded-full">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>

@@ -2,71 +2,123 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Cliente;
 use Livewire\Component;
-use Livewire\WithPagination;
+use App\Models\Cliente;
 
 class Clientes extends Component
 {
-    use WithPagination;
+    public $clientes = [];
+    public $modalOpen = false;
+    public $clienteId = null;
+    public $isCreateModalOpen = false;
+    public $isEditModalOpen = false;
 
-    public $cliente_id, $nombre, $apellido, $documento, $email, $telefono, $direccion;
-    public $modal = false;
-    public $modalDelete = false;
-    
+    public $nombre, $apellido, $documento, $email, $telefono, $direccion;
+
     protected $rules = [
-        'nombre' => 'required|min:3',
-        'apellido' => 'required|min:3',
-        'documento' => 'required|unique:clientes,documento|max:50',
-        'email' => 'required|email|unique:clientes,email',
-        'telefono' => 'nullable|max:50',
-        'direccion' => 'nullable'
+        'nombre' => 'required|string|max:255',
+        'apellido' => 'required|string|max:255',
+        'documento' => 'required|numeric|digits:8',
+        'email' => 'required|email',
+        'telefono' => 'required|numeric|digits:10',
+        'direccion' => 'required|string|max:255',
     ];
 
-    public function render()
+    public function mount()
     {
-        return view('livewire.clientes', [
-            'clientes' => Cliente::orderBy('id_cliente', 'desc')->paginate(10)
+        $this->clientes = Cliente::all();
+    }
+
+    public function create()
+    {
+        $this->validate();
+
+        Cliente::create([
+            'nombre' => $this->nombre,
+            'apellido' => $this->apellido,
+            'documento' => $this->documento,
+            'email' => $this->email,
+            'telefono' => $this->telefono,
+            'direccion' => $this->direccion,
         ]);
+
+        session()->flash('message', 'Cliente creado exitosamente.');
+        $this->resetFields();
+        $this->modalOpen = false;
+        $this->clientes = Cliente::all();
     }
 
-    public function crear()
+    public function edit($id)
     {
-        $this->limpiarCampos();
-        $this->abrirModal();
+        $cliente = Cliente::find($id);
+        if ($cliente) {
+            $this->nombre = $cliente->nombre;
+            $this->apellido = $cliente->apellido;
+            $this->documento = $cliente->documento;
+            $this->email = $cliente->email;
+            $this->telefono = $cliente->telefono;
+            $this->direccion = $cliente->direccion;
+        }
     }
 
-    public function abrirModal()
+    public function update()
     {
-        $this->modal = true;
+        $this->validate();
+
+        $cliente = Cliente::find($this->clienteId);
+        $cliente->update([
+            'nombre' => $this->nombre,
+            'apellido' => $this->apellido,
+            'documento' => $this->documento,
+            'email' => $this->email,
+            'telefono' => $this->telefono,
+            'direccion' => $this->direccion,
+        ]);
+
+        session()->flash('message', 'Cliente actualizado exitosamente.');
+        $this->resetFields();
+        $this->isEditModalOpen = false;
+        $this->clientes = Cliente::all();
     }
 
-    public function cerrarModal()
+    private function resetFields()
     {
-        $this->modal = false;
-    }
-
-    public function limpiarCampos()
-    {
-        $this->cliente_id = '';
         $this->nombre = '';
         $this->apellido = '';
         $this->documento = '';
         $this->email = '';
         $this->telefono = '';
         $this->direccion = '';
+        $this->clienteId = null;
     }
 
-    public function editar($id)
+    public function render()
     {
-        $cliente = Cliente::findOrFail($id);
-        $this->cliente_id = $cliente->id_cliente;
-        $this->nombre = $cliente->nombre;
-        $this->apellido = $cliente->apellido;
-        $this->documento = $cliente->documento;
-        $this->email = $cliente->email;
-        $this->telefono = $cliente->telefono;
-        $this->direccion = $cliente->direccion;
-        $this->abrirModal();
+        return view('livewire.clientes.clientes')
+        ->layout('layouts.app');
     }
+
+    public function abrirCreateModal()
+    {
+        $this->isCreateModalOpen = true;
+    }
+
+    public function cerrarCreateModal()
+    {
+        $this->isCreateModalOpen = false;
+        $this->resetFields();
+    }
+
+    public function abrirEditModal($id)
+    {
+        $this->clienteId = $id;
+        $this->edit($id);
+        $this->isEditModalOpen = true;
+    }
+    public function cerrarEditModal()
+    {
+        $this->isEditModalOpen = false;
+        
+    }
+
 }

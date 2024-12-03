@@ -1,9 +1,9 @@
 <div class="fixed inset-0 flex items-center justify-center z-50">
     <div class="modal-overlay absolute inset-0 bg-gray-500 opacity-50"></div>
-    <div class="modal-container bg-gray-800 w-11/12 md:w-1/4 mx-auto rounded-xl shadow-lg z-50 overflow-y-auto">
+    <div class="modal-container bg-gray-800 w-11/12 md:w-2/5 mx-auto rounded-xl shadow-lg z-50 overflow-y-auto">
         <div class="modal-header flex justify-between items-center p-4 border-b border-gray-700">
-            <h5 class="modal-title text-white">Editar Paquete Turístico</h5>
-            <button type="button" wire:click="cerrarCreateModal" class="text-gray-400 hover:text-gray-200">
+            <h5 class="modal-title text-white text-lg font-semibold">Editar Paquete Turístico</h5>
+            <button type="button" wire:click="cerrarEditModal" class="text-gray-400 hover:text-gray-200">
                 &times;
             </button>
         </div>
@@ -11,35 +11,40 @@
             <form wire:submit.prevent="update">
                 <div class="mb-3">
                     <label for="origen" class="form-label text-white">Origen</label>
-                    <input type="text" wire:model="origen" class="input input-bordered w-full" required>
+                    <input type="text" wire:model="origen" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
                 </div>
                 <div class="mb-3">
                     <label for="destino" class="form-label text-white">Destino</label>
-                    <input type="text" wire:model="destino" class="input input-bordered w-full" required>
+                    <input type="text" wire:model="destino" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
                 </div>
                 <div class="mb-3">
                     <label for="fecha_vuelo" class="form-label text-white">Fecha Vuelo</label>
-                    <input type="date" wire:model="fecha_vuelo" class="input input-bordered w-full" required>
+                    <input type="date" wire:model="fecha_vuelo" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
                 </div>
                 <div class="mb-3">
                     <label for="hora_salida" class="form-label text-white">Hora Salida</label>
-                    <input type="time" wire:model="hora_salida" class="input input-bordered w-full" required>
+                    <input type="time" wire:model="hora_salida" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
                 </div>
                 <div class="mb-3">
                     <label for="estado" class="form-label text-white">Estado</label>
-                    <input type="text" wire:model="estado" class="input input-bordered w-full" required>
+                    <select wire:model="estado" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
+                        <option value="" disabled>Selecciona un estado</option>
+                        <option value="programado" {{ $estado === 'programado' ? 'selected' : '' }}>Programado</option>
+                        <option value="completado" {{ $estado === 'completado' ? 'selected' : '' }}>completado</option>
+                        <option value="cancelado" {{ $estado === 'cancelado' ? 'selected' : '' }}>Cancelado</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="capacidad" class="form-label text-white">Capacidad</label>
-                    <input type="number" wire:model="capacidad" class="input input-bordered w-full" required>
+                    <input type="number" wire:model="capacidad" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
                 </div>
                 <div class="mb-3">
                     <label for="asientos_disponibles" class="form-label text-white">Asientos Disponibles</label>
-                    <input type="number" wire:model="asientos_disponibles" class="input input-bordered w-full" required>
+                    <input type="number" wire:model="asientos_disponibles" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
                 </div>
                 <div class="flex space-x-2">
-                    <button type="submit" class="btn btn-primary flex-1">Actualizar</button>
-                    <button type="button" wire:click="cerrarCreateModal" class="btn btn-secondary flex-1">Cancelar</button>
+                    <button type="submit" class="btn btn-primary flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Actualizar</button>
+                    <button type="button" wire:click="cerrarEditModal" class="btn btn-secondary flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Cancelar</button>
                 </div>
             </form>
         </div>

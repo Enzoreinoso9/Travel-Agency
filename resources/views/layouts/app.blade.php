@@ -20,10 +20,10 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @auth
-                <div x-data="{ sidebarOpen: true }" class="flex h-screen bg-gray-100">
+                <div x-data="{ sidebarOpen: true }" class="flex h-screen bg-gray-100 dark:bg-gray-900">
                     <!-- Sidebar -->
                     <div :class="{'w-64': sidebarOpen, 'w-20': !sidebarOpen}"
                          class="flex flex-col fixed h-screen bg-emerald-800 text-white transition-all duration-300">
@@ -38,11 +38,6 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                             </svg>
                         </button>
-
-                        <!-- Logo -->
-                        <div class="flex items-center justify-center h-16 bg-emerald-900">
-                            <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-8 w-auto">
-                        </div>
 
                         <!-- Navigation Links -->
                         <nav class="flex-1 overflow-y-auto">

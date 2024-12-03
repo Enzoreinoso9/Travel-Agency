@@ -1,82 +1,82 @@
-<div class="min-h-screen flex">
-    <!-- Lado izquierdo - Imagen de fondo con overlay -->
-    <div class="hidden lg:flex lg:w-1/2 bg-cover bg-center relative" 
-         style="background-image: url('{{ asset('images/tu-imagen.jpg') }}')">
-        <div class="absolute inset-0 bg-emerald-900/50"></div>
-        <div class="relative w-full flex items-center justify-center p-12">
-            <div class="text-center text-white">
-                <h1 class="text-4xl font-bold mb-4">Bienvenido a TuViaje</h1>
-                <p class="text-xl">Tu destino para experiencias únicas</p>
-            </div>
-        </div>
+<div class="min-h-screen flex relative">
+    <!-- Fondo con imagen -->
+    <div class="fixed inset-0 z-0">
+        <img src="{{ asset('images/background.jpg') }}" 
+             class="h-full w-full object-cover"
+             alt="Background">
     </div>
-
-    <!-- Lado derecho - Formulario -->
-    <div class="w-full lg:w-1/2 flex items-center justify-center bg-white p-8">
-        <div class="w-full max-w-md">
-            <!-- Logo o título -->
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-900">Iniciar Sesión</h2>
-                <p class="mt-2 text-sm text-gray-600">Ingresa a tu cuenta</p>
-            </div>
-
-            <!-- Formulario -->
-            <form wire:submit.prevent="login" class="space-y-6">
-                <!-- Email -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">
-                        Correo electrónico
-                    </label>
-                    <div class="mt-1">
-                        <input wire:model="email" id="email" type="email" required 
-                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
-                    </div>
-                    @error('email') 
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+    
+    <!-- Espaciador izquierdo -->
+    <div class="hidden lg:block lg:flex-1"></div>
+    
+    <!-- Contenedor del formulario -->
+    <div class="absolute right-0 top-0 w-full lg:w-1/3 h-full
+                bg-emerald-600/70 dark:bg-emerald-800/70 backdrop-blur-sm">
+        <div class="h-full flex items-center justify-center">
+            
+            <div class="w-full max-w-md p-8">
+                <!-- Logo -->
+                <div class="flex justify-center mb-8">
+                    <img src="{{ asset('images/logo.svg') }}" 
+                         alt="Logo" 
+                         class="h-12 w-auto">
                 </div>
 
-                <!-- Password -->
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">
-                        Contraseña
-                    </label>
-                    <div class="mt-1">
-                        <input wire:model="password" id="password" type="password" required 
-                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
-                    </div>
-                    @error('password') 
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Remember Me -->
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <input wire:model="remember" id="remember" type="checkbox" 
-                               class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded">
-                        <label for="remember" class="ml-2 block text-sm text-gray-700">
-                            Recordarme
-                        </label>
-                    </div>
-                 
-                </div>
-                <!-- Submit Button -->
-                <div>
-                    <button type="submit" 
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">
-                        Iniciar Sesión
-                    </button>
-                </div>
-
-                <!-- Registro -->
+                <!-- Título y subtítulo -->
                 <div class="text-center">
-                    <a href="{{ route('register') }}" 
-                       class="text-sm text-gray-300 hover:text-white hover:underline">
-                        ¿No tienes una cuenta? Regístrate
-                    </a>
+                    <h2 class="text-3xl font-bold text-white">
+                        {{ __('Welcome back') }}
+                    </h2>
+                    <p class="mt-2 text-sm text-white/80">
+                        {{ __('Please sign in to your account') }}
+                    </p>
                 </div>
-            </form>
+
+                <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                <form wire:submit.prevent="login" class="mt-8 space-y-6">
+                    <div class="space-y-5">
+                        <div>
+                            <x-input-label for="email" :value="__('Email')" class="text-white" />
+                            <x-text-input wire:model.defer="email" 
+                                id="email" 
+                                class="mt-1 block w-full rounded-md border-white/20 bg-white/10 
+                                       text-white placeholder-white/70 focus:border-white 
+                                       focus:ring-white/50" 
+                                type="email" 
+                                name="email" 
+                                required 
+                                autofocus 
+                                autocomplete="username" />
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="password" :value="__('Password')" class="text-white" />
+                            <x-text-input wire:model.defer="password" 
+                                id="password" 
+                                class="mt-1 block w-full rounded-md border-white/20 bg-white/10 
+                                       text-white placeholder-white/70 focus:border-white 
+                                       focus:ring-white/50"
+                                type="password"
+                                name="password"
+                                required 
+                                autocomplete="current-password" />
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        </div>
+                    </div>
+
+                   
+                    <div class="flex flex-col space-y-4 mt-4">
+                        <div class="flex items-center justify-end">
+                            <x-primary-button>
+                                {{ __('Log in') }}
+                            </x-primary-button>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
