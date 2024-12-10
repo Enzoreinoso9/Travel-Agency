@@ -8,6 +8,13 @@ class DetalleVenta extends Model
 {
     protected $table = 'detalles_ventas';
 
+    protected $fillable = [
+        'id_venta',
+        'id_paquete',
+        'id_pasaje',
+        'id_vuelo'
+    ];
+
     public function paquete()
     {
         return $this->belongsTo(PaqueteTuristico::class, 'id_paquete', 'id_paquete');
@@ -26,25 +33,40 @@ class DetalleVenta extends Model
 
     public function getNombrePaqueteAttribute()
     {
-        if ($this->paquete) {
-            return "{$this->paquete->origen} - {$this->paquete->destino} ({$this->paquete->fecha_vuelo} {$this->paquete->hora_salida})";
+        if ($this->id_paquete && $this->paquete) {
+            $fields = array_filter([
+                $this->paquete->origen,
+                $this->paquete->destino,
+                $this->paquete->fecha_vuelo
+            ]);
+            return !empty($fields) ? implode(' - ', $fields) : 'Sin detalles';
         }
-        return 'N/A';
+        return null;
     }
 
     public function getNombrePasajeAttribute()
     {
-        if ($this->pasaje) {
-            return "{$this->pasaje->empresa_transporte} - {$this->pasaje->origen} - {$this->pasaje->destino}";
+        if ($this->id_pasaje && $this->pasaje) {
+            $fields = array_filter([
+                $this->pasaje->empresa_transporte,
+                $this->pasaje->origen,
+                $this->pasaje->destino
+            ]);
+            return !empty($fields) ? implode(' - ', $fields) : 'Sin detalles';
         }
-        return 'N/A';
+        return null;
     }
 
     public function getNombreVueloAttribute()
     {
-        if ($this->vuelo) {
-            return "{$this->vuelo->aerolinea} - {$this->vuelo->origen} - {$this->vuelo->destino}";
+        if ($this->id_vuelo && $this->vuelo) {
+            $fields = array_filter([
+                $this->vuelo->aerolinea,
+                $this->vuelo->origen,
+                $this->vuelo->destino
+            ]);
+            return !empty($fields) ? implode(' - ', $fields) : 'Sin detalles';
         }
-        return 'N/A';
+        return null;
     }
 }

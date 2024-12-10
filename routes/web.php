@@ -9,6 +9,7 @@ use App\Http\Livewire\Dashboard\Estadisticas;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Usuarios;
 use App\Http\Livewire\Ventas;
+use App\Http\Livewire\PasajesOmnibus;
 
 // Rutas de autenticación
 Route::middleware('guest')->group(function () {
@@ -26,9 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/paquetes', PaquetesTuristicos::class)->name('paquetes');
     Route::get('/vuelos', Vuelos::class)->name('vuelos');
     Route::get('/usuarios', Usuarios::class)->name('usuarios');
-    
     Route::get('/ventas', Ventas::class)->name('ventas');
-    Route::get('/pasajes', function() { return view('pasajes'); })->name('pasajes');
+    Route::get('/pasajes-omnibus', PasajesOmnibus::class)->name('pasajes-omnibus');
     
     // Ruta de logout
     Route::post('/logout', function () {
@@ -36,5 +36,3 @@ Route::middleware('auth')->group(function () {
         return redirect('/login');
     })->name('logout');
 });
-
-

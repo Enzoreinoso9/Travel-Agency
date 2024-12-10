@@ -43,7 +43,7 @@
 </li>
 
 <li>
-    <x-nav-link :href="route('pasajes')" :active="request()->routeIs('pasajes')"
+    <x-nav-link :href="route('pasajes-omnibus')" :active="request()->routeIs('pasajes')"
         class="flex items-center p-3 text-white rounded-lg hover:bg-emerald-700 group">
         <svg class="w-5 h-5 transition duration-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 

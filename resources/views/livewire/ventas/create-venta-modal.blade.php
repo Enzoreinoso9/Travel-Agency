@@ -40,7 +40,9 @@
                         <select wire:model="id_paquete" @if(!$selectPaquete) disabled @endif class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white">
                             <option value="">Seleccione un paquete</option>
                             @foreach ($paquetes as $paquete)
-                                <option value="{{ $paquete->id_paquete }}">{{ $paquete->nombre }}</option>
+                                <option value="{{ $paquete->id_paquete }}">
+                                    {{ $paquete->origen }} - {{ $paquete->destino }} - {{ $paquete->fecha_vuelo }}
+                                </option>
                             @endforeach
                         </select>
                         @error('id_paquete') <span class="text-red-500">{{ $message }}</span> @enderror
@@ -54,7 +56,9 @@
                         <select wire:model="id_pasaje" @if(!$selectPasaje) disabled @endif class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white">
                             <option value="">Seleccione un pasaje</option>
                             @foreach ($pasajes as $pasaje)
-                                <option value="{{ $pasaje->id_pasaje }}" @if($selectPasaje) selected @endif>{{ $pasaje->nombre }}</option>
+                                <option value="{{ $pasaje->id_pasaje }}">
+                                    {{ $pasaje->empresa_transporte }} - {{ $pasaje->origen }} - {{ $pasaje->destino }}
+                                </option>
                             @endforeach
                         </select>
                         @error('id_pasaje') <span class="text-red-500">{{ $message }}</span> @enderror
@@ -68,7 +72,9 @@
                         <select wire:model="id_vuelo" @if(!$selectVuelo) disabled @endif class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white">
                             <option value="">Seleccione un vuelo</option>
                             @foreach ($vuelos as $vuelo)
-                                <option value="{{ $vuelo->id_vuelo }}" @if($selectVuelo) selected @endif>{{ $vuelo->nombre }}</option>
+                                <option value="{{ $vuelo->id_vuelo }}">
+                                    {{ $vuelo->aerolinea }} - {{ $vuelo->origen }} - {{ $vuelo->destino }}
+                                </option>
                             @endforeach
                         </select>
                         @error('id_vuelo') <span class="text-red-500">{{ $message }}</span> @enderror
@@ -84,4 +90,3 @@
         </div>
     </div>
 </div>
-

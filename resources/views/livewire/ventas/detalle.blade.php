@@ -15,9 +15,15 @@
 
             <h4 class="text-lg font-semibold text-white mt-4">Detalles de la Venta</h4>
             <ul class="list-disc pl-5 text-white">
-                <li><strong>Paquete:</strong> {{ $venta->detalles->nombre_paquete }}</li>
-                <li><strong>Pasaje:</strong> {{ $venta->detalles->nombre_pasaje }}</li>
-                <li><strong>Vuelo:</strong> {{ $venta->detalles->nombre_vuelo }}</li>
+                @if($venta->detalles->id_paquete)
+                    <li><strong>Paquete Turístico:</strong> {{ $venta->detalles->nombre_paquete }}</li>
+                @endif
+                @if($venta->detalles->id_pasaje)
+                    <li><strong>Pasaje:</strong> {{ $venta->detalles->nombre_pasaje }}</li>
+                @endif
+                @if($venta->detalles->id_vuelo)
+                    <li><strong>Vuelo:</strong> {{ $venta->detalles->nombre_vuelo }}</li>
+                @endif
             </ul>
                     
             
