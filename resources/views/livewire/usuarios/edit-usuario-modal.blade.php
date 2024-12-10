@@ -8,20 +8,12 @@
             </button>
         </div>
         <div class="modal-body p-4">
-            <form wire:submit.prevent="update">
-                <div class="mb-3">
-                    <label for="nombre_usuario" class="form-label text-white">Nombre de Usuario</label>
-                    <input type="text" wire:model="nombre_usuario" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label text-white">Email</label>
-                    <input type="email" wire:model="email" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
-                </div>
+            <form wire:submit.prevent="updateRole">
                 <div class="mb-3">
                     <label for="rol" class="form-label text-white">Rol</label>
                     <select wire:model="rol" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
-                        <option value="admin">Administrador</option>
-                        <option value="user">Usuario</option>
+                        <option value="admin" {{ $rol === 'admin' ? 'selected' : '' }}>Administrador</option>
+                        <option value="usuario" {{ $rol === 'usuario' ? 'selected' : '' }}>Usuario</option>
                     </select>
                 </div>
                 <div class="flex space-x-2">

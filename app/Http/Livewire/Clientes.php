@@ -4,10 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Cliente;
+use Livewire\WithPagination;
 
 class Clientes extends Component
 {
-    public $clientes = [];
+    use WithPagination;
+
     public $modalOpen = false;
     public $clienteId = null;
     public $isCreateModalOpen = false;
@@ -24,10 +26,7 @@ class Clientes extends Component
         'direccion' => 'required|string|max:255',
     ];
 
-    public function mount()
-    {
-        $this->clientes = Cliente::all();
-    }
+    
 
     public function create()
     {
@@ -45,7 +44,6 @@ class Clientes extends Component
         session()->flash('message', 'Cliente creado exitosamente.');
         $this->resetFields();
         $this->modalOpen = false;
-        $this->clientes = Cliente::all();
     }
 
     public function edit($id)
@@ -78,7 +76,6 @@ class Clientes extends Component
         session()->flash('message', 'Cliente actualizado exitosamente.');
         $this->resetFields();
         $this->isEditModalOpen = false;
-        $this->clientes = Cliente::all();
     }
 
     private function resetFields()
@@ -94,8 +91,9 @@ class Clientes extends Component
 
     public function render()
     {
-        return view('livewire.clientes.clientes')
-        ->layout('layouts.app');
+        return view('livewire.clientes.clientes', [
+            'clientes' => Cliente::paginate(10)
+        ])->layout('layouts.app');
     }
 
     public function abrirCreateModal()

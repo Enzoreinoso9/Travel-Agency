@@ -28,7 +28,7 @@ class Usuarios extends Component
     public function render()
     {
         return view('livewire.usuarios.index', [
-            'usuarios' => Usuario::paginate(10)
+            'usuarios' => Usuario::where('rol', 'usuario')->paginate(10)
         ])->layout('layouts.app');
     }
 
@@ -46,13 +46,18 @@ class Usuarios extends Component
 
     public function create()
     {
-        $this->validate();
+        // Validar los campos
+        $this->validate([
+            'nombre_usuario' => 'required|string|max:255',
+            'email' => 'required|email|unique:usuarios,email',
+            'password' => 'required|string|min:8',
+        ]);
 
         Usuario::create([
             'nombre_usuario' => $this->nombre_usuario,
             'email' => $this->email,
-            'password' => Hash::make($this->password),
-            'rol' => $this->rol,
+            'password' => Hash::make($this->password), // Cifrar la contraseña
+            'rol' => 'usuario', // Establecer rol por defecto como 'usuario'
         ]);
 
         session()->flash('message', 'Usuario creado exitosamente.');
@@ -76,26 +81,49 @@ class Usuarios extends Component
     {
         $usuario = Usuario::find($id);
         if ($usuario) {
-            $this->nombre_usuario = $usuario->nombre_usuario;
-            $this->email = $usuario->email;
+            /* $this->nombre_usuario = $usuario->nombre_usuario;
+            $this->email = $usuario->email; */
             $this->rol = $usuario->rol;
         }
     }
 
     public function update()
     {
+        // Comentar o eliminar este método si no es necesario
+        /*
+        // Validar los campos
         $this->validate();
 
         $usuario = Usuario::find($this->usuarioId);
-        $usuario->update([
-            'nombre_usuario' => $this->nombre_usuario,
-            'email' => $this->email,
-            'rol' => $this->rol,
-            // No actualizamos la contraseña a menos que se proporcione una nueva
+        if ($usuario) {
+            $usuario->update([
+                'nombre_usuario' => $this->nombre_usuario,
+                'email' => $this->email,
+                'rol' => $this->rol,
+            ]);
+
+            session()->flash('message', 'Usuario actualizado exitosamente.');
+            $this->cerrarEditModal();
+        }
+        */
+    }
+
+    public function updateRole()
+    {
+        // Validar solo el campo rol
+        $this->validate([
+            'rol' => 'required|string|in:admin,usuario', // Validar solo el rol
         ]);
 
-        session()->flash('message', 'Usuario actualizado exitosamente.');
-        $this->cerrarEditModal();
+        $usuario = Usuario::find($this->usuarioId);
+        if ($usuario) {
+            $usuario->update([
+                'rol' => $this->rol, // Solo actualizar el rol
+            ]);
+
+            session()->flash('message', 'Rol actualizado exitosamente.');
+            $this->cerrarEditModal();
+        }
     }
 
     public function delete($id)

@@ -36,13 +36,16 @@
                         <td class="p-2">{{ $usuario->nombre_usuario }}</td>
                         <td class="p-2">{{ $usuario->email }}</td>
                         <td class="p-2">{{ $usuario->rol }}</td>
-                        <td class="p-2 flex space-x-2">
-                            <button wire:click="abrirEditModal({{ $usuario->id_usuario }})" class="w-8 h-8 flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white rounded-full">
-                                <i class="fas fa-edit"></i>
+                        <td class="p-2">
+                            <button wire:click="abrirEditModal({{ $usuario->id_usuario }})" class="flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                                Asignar como Administrador
                             </button>
-                            <button wire:click="delete({{ $usuario->id_usuario }})" class="w-8 h-8 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded-full">
+                           {{--  <button wire:click="delete({{ $usuario->id_usuario }})" class="w-8 h-8 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded-full">
                                 <i class="fas fa-trash"></i>
-                            </button>
+                            </button> --}}
                         </td>
                     </tr>
                 @endforeach

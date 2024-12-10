@@ -47,4 +47,10 @@ class Venta extends Model
     {
         return $this->belongsTo(Usuario::class, 'id_usuario', 'id_usuario');
     }
+
+    // Definir la relación con DetalleVenta
+    public function detalles()
+    {
+        return $this->hasOne(DetalleVenta::class, 'id_venta');
+    }
 }

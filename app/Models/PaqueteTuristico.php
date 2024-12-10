@@ -10,6 +10,7 @@ class PaqueteTuristico extends Model
     protected $primaryKey = 'id_paquete';
 
     protected $fillable = [
+        'nombre',
         'origen',
         'destino',
         'fecha_vuelo',

@@ -21,14 +21,6 @@
                     <label for="password" class="form-label text-white">Contraseña</label>
                     <input type="password" wire:model="password" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
                 </div>
-                <div class="mb-3">
-                    <label for="rol" class="form-label text-white">Rol</label>
-                    <select wire:model="rol" class="input input-bordered w-full p-2 rounded border border-gray-600 bg-gray-700 text-white" required>
-                        <option value="">Seleccione un rol</option>
-                        <option value="admin">Administrador</option>
-                        <option value="user">Usuario</option>
-                    </select>
-                </div>
                 <div class="flex space-x-2">
                     <button type="submit" class="btn btn-primary flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Crear</button>
                     <button type="button" wire:click="cerrarCreateModal" class="btn btn-secondary flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Cancelar</button>

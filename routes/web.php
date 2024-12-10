@@ -8,6 +8,7 @@ use App\Http\Livewire\Vuelos;
 use App\Http\Livewire\Dashboard\Estadisticas;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Usuarios;
+use App\Http\Livewire\Ventas;
 
 // Rutas de autenticación
 Route::middleware('guest')->group(function () {
@@ -24,8 +25,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/clientes', Clientes::class)->name('clientes');
     Route::get('/paquetes', PaquetesTuristicos::class)->name('paquetes');
     Route::get('/vuelos', Vuelos::class)->name('vuelos');
+    Route::get('/usuarios', Usuarios::class)->name('usuarios');
     
-    Route::get('/ventas', function() { return view('ventas'); })->name('ventas');
+    Route::get('/ventas', Ventas::class)->name('ventas');
     Route::get('/pasajes', function() { return view('pasajes'); })->name('pasajes');
     
     // Ruta de logout
@@ -35,7 +37,4 @@ Route::middleware('auth')->group(function () {
     })->name('logout');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/usuarios', Usuarios::class)->name('usuarios');
-    // Otras rutas que solo deben ser accesibles por administradores
-});
+

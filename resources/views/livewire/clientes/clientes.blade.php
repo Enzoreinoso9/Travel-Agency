@@ -74,5 +74,10 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Paginación -->
+        <div class="mt-4">
+            {{ $clientes->links() }} <!-- Esto debe funcionar si $clientes es un objeto de paginación -->
+        </div>
     </div>
 </div>
